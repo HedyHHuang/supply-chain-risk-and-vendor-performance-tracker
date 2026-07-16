@@ -1,0 +1,17 @@
+.vendor-scorecard-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.vendor-scorecard-form input,
+.vendor-scorecard-form textarea {
+    padding: 8px;
+}
+
+.vendor-scorecard-form button {
+    margin-top: 8px;
+    padding: 8px;
+}

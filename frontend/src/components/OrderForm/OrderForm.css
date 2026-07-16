@@ -1,0 +1,16 @@
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.order-form input {
+    padding: 8px;
+}
+
+.order-form button {
+    margin-top: 8px;
+    padding: 8px;
+}

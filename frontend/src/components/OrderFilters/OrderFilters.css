@@ -1,0 +1,7 @@
+.order-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 400px;
+    padding: 20px;
+}

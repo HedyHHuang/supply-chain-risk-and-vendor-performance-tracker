@@ -1,0 +1,22 @@
+.auth-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-form input,
+.auth-form button {
+    padding: 10px;
+}
+
+.auth-error {
+    color: red;
+}
