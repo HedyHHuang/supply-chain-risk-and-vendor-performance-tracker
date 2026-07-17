@@ -1,0 +1,17 @@
+.scorecard-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 400px;
+    padding: 20px;
+    border-top: 1px solid #d9e2ec;
+}
+
+.scorecard-filters h2 {
+    margin-top: 0;
+}
+
+.scorecard-filters input,
+.scorecard-filters select {
+    padding: 8px;
+}

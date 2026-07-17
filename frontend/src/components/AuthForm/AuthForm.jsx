@@ -54,60 +54,91 @@ function AuthForm({ onLogin, onRegister }) {
 
     return (
         <main className="auth-page">
-            <form className="auth-form" onSubmit={handleSubmit}>
-                <h1>Supply Chain Risk & Vendor Performance Tracker</h1>
-                <h2>{mode === "login" ? "Login" : "Register"}</h2>
+            <section className="auth-intro">
+                <p className="auth-eyebrow">Supply Chain Operations</p>
 
-                {mode === "register" && (
-                    <>
-                        <label htmlFor="authName">Name</label>
-                        <input
-                            id="authName"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </>
-                )}
+                <h1>Risk & Vendor Performance Tracker</h1>
 
-                <label htmlFor="authEmail">Email</label>
-                <input
-                    id="authEmail"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
+                <p className="auth-description">
+                    Track purchase orders, identify supply chain risks, manage
+                    corrective actions, and review vendor performance in one place.
+                </p>
 
-                <label htmlFor="authPassword">Password</label>
-                <input
-                    id="authPassword"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    minLength="6"
-                    required
-                />
+                <ul className="auth-features">
+                    <li>Monitor late deliveries and quantity shortages</li>
+                    <li>Track corrective actions and issue status</li>
+                    <li>Create data-driven vendor scorecards</li>
+                </ul>
+            </section>
 
-                {errorMessage && (
-                    <p className="auth-error" role="alert">
-                        {errorMessage}
+            <section className="auth-card">
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <p className="auth-form-label">
+                        {mode === "login" ? "Welcome back" : "Create your account"}
                     </p>
-                )}
 
-                <button type="submit">
-                    {mode === "login" ? "Login" : "Register"}
-                </button>
+                    <h2>{mode === "login" ? "Login" : "Register"}</h2>
 
-                <button type="button" onClick={toggleMode}>
-                    {mode === "login"
-                        ? "Create an account"
-                        : "Already have an account"}
-                </button>
-            </form>
+                    {mode === "register" && (
+                        <>
+                            <label htmlFor="authName">Name</label>
+                            <input
+                                id="authName"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                autoComplete="name"
+                                required
+                            />
+                        </>
+                    )}
+
+                    <label htmlFor="authEmail">Email</label>
+                    <input
+                        id="authEmail"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        autoComplete="email"
+                        required
+                    />
+
+                    <label htmlFor="authPassword">Password</label>
+                    <input
+                        id="authPassword"
+                        name="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        autoComplete={
+                            mode === "login" ? "current-password" : "new-password"
+                        }
+                        minLength="6"
+                        required
+                    />
+
+                    {errorMessage && (
+                        <p className="auth-error" role="alert">
+                            {errorMessage}
+                        </p>
+                    )}
+
+                    <button className="auth-submit-button" type="submit">
+                        {mode === "login" ? "Login" : "Register"}
+                    </button>
+
+                    <button
+                        className="auth-toggle-button"
+                        type="button"
+                        onClick={toggleMode}
+                    >
+                        {mode === "login"
+                            ? "Create an account"
+                            : "Already have an account? Login"}
+                    </button>
+                </form>
+            </section>
         </main>
     );
 }

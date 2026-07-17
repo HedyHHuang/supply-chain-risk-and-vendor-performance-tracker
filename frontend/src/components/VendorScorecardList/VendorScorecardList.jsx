@@ -1,75 +1,105 @@
 import PropTypes from "prop-types";
 import "./VendorScorecardList.css";
 
-function VendorScorecardList({ scorecards, onEditScorecard, onDeleteScorecard }) {
+function VendorScorecardList({
+    scorecards,
+    onEditScorecard,
+    onDeleteScorecard,
+}) {
     return (
-        <section className="vendor-scorecard-list">
-            <h2>Vendor Scorecards</h2>
+        <section className="scorecard-list">
+            <div className="list-heading">
+                <div>
+                    <p className="section-eyebrow">Supplier Evaluation</p>
+                    <h2>Vendor Scorecards</h2>
+                </div>
+
+                <span>{scorecards.length} shown</span>
+            </div>
 
             {scorecards.length === 0 ? (
-                <p>No vendor scorecards available.</p>
+                <p className="empty-message">No scorecards available.</p>
             ) : (
-                <ul>
-                    {scorecards.map((scorecard) => (
-                        <li key={scorecard.id}>
-                            <strong>{scorecard.vendorName}</strong>
-                            <br />
-                            Delivery Score: {scorecard.deliveryScore}
-                            <br />
-                            Quality Score: {scorecard.qualityScore}
-                            <br />
-                            Communication Score: {scorecard.communicationScore}
-                            <br />
-                            Responsiveness Score: {scorecard.responsivenessScore}
-                            <br />
-                            Cost Score: {scorecard.costScore}
-                            <br />
-                            Overall Score: {scorecard.overallScore}
-                            <br />
-                            Performance Rating: {scorecard.performanceRating}
-                            <br />
-                            Comments: {scorecard.comments || "N/A"}
-                            <br />
-                            Corrective Action: {scorecard.correctiveAction || "N/A"}
-                            <button
-                                type="button"
-                                onClick={() => onEditScorecard(scorecard)}
-                            >
-                                Edit
-                            </button>
-                            <br />
-                            <button
-                                type="button"
-                                onClick={() => onDeleteScorecard(scorecard.id)}
-                            >
-                                Delete
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Delivery</th>
+                                <th>Quality</th>
+                                <th>Communication</th>
+                                <th>Responsiveness</th>
+                                <th>Cost</th>
+                                <th>Overall</th>
+                                <th>Rating</th>
+                                <th>Comments</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {scorecards.map((scorecard) => (
+                                <tr key={scorecard.id}>
+                                    <td>
+                                        <strong>{scorecard.vendorName}</strong>
+                                    </td>
+
+                                    <td>{scorecard.deliveryScore}</td>
+                                    <td>{scorecard.qualityScore}</td>
+                                    <td>{scorecard.communicationScore}</td>
+                                    <td>{scorecard.responsivenessScore}</td>
+                                    <td>{scorecard.costScore}</td>
+
+                                    <td>
+                                        <strong>{scorecard.overallScore}</strong>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            className={`badge rating-${scorecard.performanceRating
+                                                .toLowerCase()
+                                                .replace(/\s+/g, "-")}`}
+                                        >
+                                            {scorecard.performanceRating}
+                                        </span>
+                                    </td>
+
+                                    <td>{scorecard.comments || "-"}</td>
+
+                                    <td>
+                                        <div className="table-actions">
+                                            <button
+                                                type="button"
+                                                onClick={() => onEditScorecard(scorecard)}
+                                            >
+                                                Edit
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                className="delete-button"
+                                                onClick={() =>
+                                                    onDeleteScorecard(scorecard.id)
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </section>
     );
 }
 
 VendorScorecardList.propTypes = {
-    scorecards: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            vendorName: PropTypes.string.isRequired,
-            deliveryScore: PropTypes.string.isRequired,
-            qualityScore: PropTypes.string.isRequired,
-            communicationScore: PropTypes.string.isRequired,
-            responsivenessScore: PropTypes.string.isRequired,
-            costScore: PropTypes.string.isRequired,
-            overallScore: PropTypes.number.isRequired,
-            performanceRating: PropTypes.string.isRequired,
-            comments: PropTypes.string,
-            correctiveAction: PropTypes.string,
-            onDeleteScorecard: PropTypes.func.isRequired,
-            onEditScorecard: PropTypes.func.isRequired,
-        }),
-    ).isRequired,
+    scorecards: PropTypes.array.isRequired,
+    onEditScorecard: PropTypes.func.isRequired,
+    onDeleteScorecard: PropTypes.func.isRequired,
 };
 
 export default VendorScorecardList;

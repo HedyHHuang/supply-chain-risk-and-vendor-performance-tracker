@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "./App.css";
+import Pagination from "./components/Pagination/Pagination";
 import {
   getCurrentUser,
   loginUser,
@@ -31,6 +33,7 @@ import OrderFilters from "./components/OrderFilters/OrderFilters";
 import OrderList from "./components/OrderList/OrderList";
 import VendorScorecardForm from "./components/VendorScorecardForm/VendorScorecardForm";
 import VendorScorecardList from "./components/VendorScorecardList/VendorScorecardList";
+import ScorecardFilters from "./components/ScorecardFilters/ScorecardFilters";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("orders");
@@ -48,6 +51,15 @@ function App() {
   });
   const [currentUser, setCurrentUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [orderPage, setOrderPage] = useState(1);
+  const [orderPageSize, setOrderPageSize] = useState(10);
+
+  const [scorecardPage, setScorecardPage] = useState(1);
+  const [scorecardPageSize, setScorecardPageSize] = useState(10);
+  const [scorecardFilters, setScorecardFilters] = useState({
+    vendorName: "",
+    performanceRating: "",
+  });
 
   useEffect(() => {
     async function checkAuthentication() {
@@ -233,6 +245,30 @@ function App() {
 
     return matchesVendor && matchesRisk && matchesStatus;
   });
+  const filteredScorecards = scorecards.filter((scorecard) => {
+    const matchesVendor = scorecard.vendorName
+      .toLowerCase()
+      .includes(scorecardFilters.vendorName.toLowerCase());
+
+    const matchesRating =
+      scorecardFilters.performanceRating === "" ||
+      scorecard.performanceRating === scorecardFilters.performanceRating;
+
+    return matchesVendor && matchesRating;
+  });
+  const orderStartIndex = (orderPage - 1) * orderPageSize;
+  const paginatedOrders = filteredOrders.slice(
+    orderStartIndex,
+    orderStartIndex + orderPageSize,
+  );
+
+  const scorecardStartIndex =
+    (scorecardPage - 1) * scorecardPageSize;
+
+  const paginatedScorecards = filteredScorecards.slice(
+    scorecardStartIndex,
+    scorecardStartIndex + scorecardPageSize,
+  );
   async function handleRegister(userData) {
     await registerUser(userData);
 
@@ -274,53 +310,98 @@ function App() {
   }
 
   return (
-    <main>
-      <p>Logged in as {currentUser.name}</p>
+    <div className="app-container">
+      <div className="user-bar">
+        <p>Logged in as {currentUser.name}</p>
 
-      <button type="button" onClick={handleLogout}>
-        Logout
-      </button>
+        <button type="button" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
       <Navbar onPageChange={setCurrentPage} />
 
-      {currentPage === "orders" && (
-        <>
-          <OrderForm
-            editingOrder={editingOrder}
-            onAddOrder={handleAddOrder}
-            onUpdateOrder={handleUpdateOrder}
-            onCancelEdit={handleCancelEdit}
-          />
+      <main className="page-content">
+        {currentPage === "orders" && (
+          <div className="orders-layout">
+            <div className="left-panel">
+              <OrderForm
+                editingOrder={editingOrder}
+                onAddOrder={handleAddOrder}
+                onUpdateOrder={handleUpdateOrder}
+                onCancelEdit={handleCancelEdit}
+              />
 
-          <OrderFilters
-            filters={filters}
-            onFilterChange={setFilters}
-          />
+              <OrderFilters
+                filters={filters}
+                onFilterChange={(newFilters) => {
+                  setFilters(newFilters);
+                  setOrderPage(1);
+                }}
+              />
+            </div>
 
-          <OrderList
-            orders={filteredOrders}
-            onEditOrder={handleEditOrder}
-            onDeleteOrder={handleDeleteOrder}
-          />
-        </>
-      )}
+            <div className="right-panel">
+              <OrderList
+                orders={paginatedOrders}
+                onEditOrder={handleEditOrder}
+                onDeleteOrder={handleDeleteOrder}
+              />
 
-      {currentPage === "scorecards" && (
-        <>
-          <VendorScorecardForm
-            editingScorecard={editingScorecard}
-            onAddScorecard={handleAddScorecard}
-            onUpdateScorecard={handleUpdateScorecard}
-            onCancelEdit={handleCancelScorecardEdit}
-          />
+              <Pagination
+                currentPage={orderPage}
+                pageSize={orderPageSize}
+                totalItems={filteredOrders.length}
+                onPageChange={setOrderPage}
+                onPageSizeChange={(newPageSize) => {
+                  setOrderPageSize(newPageSize);
+                  setOrderPage(1);
+                }}
+              />
+            </div>
+          </div>
+        )}
 
-          <VendorScorecardList
-            scorecards={scorecards}
-            onEditScorecard={handleEditScorecard}
-            onDeleteScorecard={handleDeleteScorecard}
-          />
-        </>
-      )}
-    </main>
+        {currentPage === "scorecards" && (
+          <div className="scorecards-layout">
+            <div className="left-panel">
+              <VendorScorecardForm
+                editingScorecard={editingScorecard}
+                onAddScorecard={handleAddScorecard}
+                onUpdateScorecard={handleUpdateScorecard}
+                onCancelEdit={handleCancelScorecardEdit}
+              />
+              <ScorecardFilters
+                filters={scorecardFilters}
+                onFilterChange={(newFilters) => {
+                  setScorecardFilters(newFilters);
+                  setScorecardPage(1);
+                }}
+              />
+            </div>
+
+            <div className="right-panel">
+              <VendorScorecardList
+                scorecards={paginatedScorecards}
+                onEditScorecard={handleEditScorecard}
+                onDeleteScorecard={handleDeleteScorecard}
+              />
+
+              <Pagination
+                currentPage={scorecardPage}
+                pageSize={scorecardPageSize}
+                totalItems={filteredScorecards.length}
+                onPageChange={setScorecardPage}
+                onPageSizeChange={(newPageSize) => {
+                  setScorecardPageSize(newPageSize);
+                  setScorecardPage(1);
+                }}
+              />
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
   );
 }
 

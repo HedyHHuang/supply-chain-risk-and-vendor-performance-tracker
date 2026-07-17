@@ -1,3 +1,124 @@
 .order-list {
     padding: 20px;
 }
+
+.list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.list-heading h2 {
+    margin: 3px 0 0;
+}
+
+.section-eyebrow {
+    margin: 0;
+    color: #627d98;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.list-heading span {
+    color: #627d98;
+    font-size: 0.9rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1250px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #d9e2ec;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #f0f4f8;
+    color: #334e68;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.risk-high {
+    background: #ffe3e3;
+    color: #a61b1b;
+}
+
+.risk-medium {
+    background: #fff3c4;
+    color: #8d5b00;
+}
+
+.risk-low {
+    background: #e6f6ff;
+    color: #075985;
+}
+
+.risk-none {
+    background: #e8f5e9;
+    color: #256029;
+}
+
+.status-open {
+    background: #ffe3e3;
+    color: #a61b1b;
+}
+
+.status-in-progress {
+    background: #fff3c4;
+    color: #8d5b00;
+}
+
+.status-resolved {
+    background: #e8f5e9;
+    color: #256029;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.table-actions button {
+    padding: 7px 10px;
+    border: 1px solid #9fb3c8;
+    border-radius: 5px;
+    background: white;
+}
+
+.table-actions .delete-button {
+    border-color: #e2a8a8;
+    color: #a61b1b;
+}
+
+.empty-message {
+    color: #627d98;
+}

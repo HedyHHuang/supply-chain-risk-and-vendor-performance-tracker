@@ -4,9 +4,12 @@ import "./Navbar.css";
 function Navbar({ onPageChange }) {
     return (
         <header className="navbar">
-            <h1>Supply Chain Risk & Vendor Performance Tracker</h1>
+            <div>
+                <p className="navbar-eyebrow">Supply Chain Operations</p>
+                <h1>Risk & Vendor Performance Tracker</h1>
+            </div>
 
-            <nav>
+            <nav className="navbar-nav" aria-label="Main navigation">
                 <button type="button" onClick={() => onPageChange("orders")}>
                     Orders
                 </button>
