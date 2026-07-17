@@ -3,13 +3,15 @@
 ## Author
 Han Huang
 
----
+## Course
 
-## Live Demo
+**Course:** CS5610 Web Development  
+**Class link**
+https://johnguerra.co/classes/webDevelopment_online_summer_2026/
 
-https://supply-chain-risk-backend.onrender.com
+## Live Website
 
----
+[Open the deployed application](https://supply-chain-risk-backend.onrender.com)
 
 ## Project Description
 
