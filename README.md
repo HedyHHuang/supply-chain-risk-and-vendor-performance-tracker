@@ -232,6 +232,15 @@ Or access the deployed application:
 https://supply-chain-risk-backend.onrender.com
 
 ---
+## How to Use
+
+1. Register a new account or log in with an existing account.
+2. Open the **Orders** page to create, update, review, or delete purchase order records.
+3. Use the vendor, risk level, and status filters to quickly find specific orders.
+4. Open the **Vendor Scorecards** page to create and manage vendor performance records.
+5. Enter delivery, quality, communication, responsiveness, and cost scores. The application will automatically calculate the overall score and performance rating.
+6. Click **Logout** when you are finished using the application.
+---
 
 ## AI Usage Disclosure
 
