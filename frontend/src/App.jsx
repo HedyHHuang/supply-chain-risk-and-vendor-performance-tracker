@@ -326,6 +326,7 @@ function App() {
           <div className="orders-layout">
             <div className="left-panel">
               <OrderForm
+                key={editingOrder?.id ?? "new-order"}
                 editingOrder={editingOrder}
                 onAddOrder={handleAddOrder}
                 onUpdateOrder={handleUpdateOrder}
@@ -366,6 +367,7 @@ function App() {
           <div className="scorecards-layout">
             <div className="left-panel">
               <VendorScorecardForm
+                key={editingScorecard?.id ?? "new-scorecard"}
                 editingScorecard={editingScorecard}
                 onAddScorecard={handleAddScorecard}
                 onUpdateScorecard={handleUpdateScorecard}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./VendorScorecardForm.css";
 
@@ -19,15 +19,9 @@ function VendorScorecardForm({
     onUpdateScorecard,
     onCancelEdit,
 }) {
-    const [formData, setFormData] = useState(emptyFormData);
-
-    useEffect(() => {
-        if (editingScorecard) {
-            setFormData(editingScorecard);
-        } else {
-            setFormData(emptyFormData);
-        }
-    }, [editingScorecard]);
+    const [formData, setFormData] = useState(
+        editingScorecard ?? emptyFormData,
+    );
 
     function handleChange(event) {
         const { name, value } = event.target;

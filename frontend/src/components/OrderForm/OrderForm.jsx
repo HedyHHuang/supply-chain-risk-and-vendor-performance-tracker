@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./OrderForm.css";
 
@@ -21,15 +21,9 @@ function OrderForm({
     onUpdateOrder,
     onCancelEdit,
 }) {
-    const [formData, setFormData] = useState(emptyFormData);
-
-    useEffect(() => {
-        if (editingOrder) {
-            setFormData(editingOrder);
-        } else {
-            setFormData(emptyFormData);
-        }
-    }, [editingOrder]);
+    const [formData, setFormData] = useState(
+        editingOrder ?? emptyFormData,
+    );
 
     function handleChange(event) {
         const { name, value } = event.target;
