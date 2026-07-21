@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import "./Pagination.css";
-
+// Logan added a though here
 function Pagination({
     currentPage,
     pageSize,
