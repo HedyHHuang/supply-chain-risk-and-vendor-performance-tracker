@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "./OrderForm.css";
-
+// Logan added a thought here
 const emptyFormData = {
     poNumber: "",
     vendorName: "",
